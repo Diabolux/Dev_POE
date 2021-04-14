@@ -2,9 +2,9 @@
 
 (function () {
 
-    let salaireBrut = document.querySelector("#grossSalary");
-    let genre = document.querySelector("#gender");
-    let nbPersonnesACharge = document.querySelector("#dependents")
+    let salaireBrut = parseInt(document.querySelector("#grossSalary"));
+    let genre = pareInt(document.querySelector("#gender"));
+    let nbPersonnesACharge = parseInt(document.querySelector("#dependents"));
 
     function employe(salaireBrut, genre, nbPersonnesACharge) {
         this.salaireBrut = salaireBrut;
@@ -13,42 +13,34 @@
 
         this.taxeReduction = function () {
             let pourcentage = 18;
-            switch (nbPersonnesACharge) {
-                case 3:
+            switch (true) {
+                case nbPersonnesACharge == 3:
                     pourcentage -= 1;
                     break;
-                case 4:
+                case nbPersonnesACharge >= 4:
                     pourcentage -= 2;
                     break;
             }
             if (this.genre == 'F') pourcentage -= 2;
-            let impotRevenu = Math.round((this.salaireBrut * (pourcentage / 100)*100)/100);
+            var impotRevenu = Math.round((this.salaireBrut * (pourcentage / 100)*100)/100);
             console.log("Impôt sur le revenu : " + impotRevenu);
             return impotRevenu;
         }
 
         this.assEmploye = function () {
-            let assuranceEmploye = Math.round((this.salaireBrut * 0.07*100)/100);
+            var assuranceEmploye = Math.round((this.salaireBrut * 0.07*100)/100);
             console.log("Assurance employé : " + assuranceEmploye);
             return assuranceEmploye;
         }
 
         this.regPension = function () {
-            let regimePension = Math.round((this.salaireBrut * 0.05*100)/100);
+            var regimePension = Math.round((this.salaireBrut * 0.05*100)/100);
             console.log("Régime de pensions du Canada : " + regimePension);
             return regimePension;
         }
 
-        console.log(this.regimePension);
-
         this.salaire = function () {
-            let salaireNet = this.salaireBrut - this.impotRevenu - this.assuranceEmploye - this.regimePension;
-            
-            //Je n'arrive pas à récupérer la valeur des différentes parties
-            console.log(this.impotRevenu);
-            console.log(this.assuranceEmploye);
-            console.log(this.regimePension);
-
+            var salaireNet = this.salaireBrut - this.taxeReduction() - this.assEmploye() - this.regPension();
             if (document.querySelector("#additionBonus")) salaireNet += 100;
             if (document.querySelector("#additionAllowance")) salaireNet += 150;
             console.log("Salaire Net : " + salaireNet);
@@ -60,9 +52,10 @@
     }
 
     //Test dans la console
-    let newPersonne = new employe(35000, 'F', 0);
+    let newPersonne = new employe(40000, 'F', 3);
     newPersonne.taxeReduction();
     newPersonne.assEmploye();
     newPersonne.regPension();
     newPersonne.salaire();
+    
 })();
