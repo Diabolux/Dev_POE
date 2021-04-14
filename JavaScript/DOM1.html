@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<title>Test</title>
+<meta charset="UTF-8">
+<script>
+	
+	
+</script>
+
+</head>
+<body>
+
+<input type="text" id="course"><input type="button" value="OK" onclick="ajout()">
+
+<ul id="listecommissions">
+	<li>1kg de farine</li>
+	<li>un pack de lait</li>
+</ul>
+
+<script>
+	function ajout(){
+		let ul = document.querySelector("#listecommissions"); // On sélectionne notre liste
+		let li = document.createElement("li"); //On crée un nouvel li
+		li.textContent = document.querySelector("#course").value; // On lui donne la valeur de l'entrée de l'input
+		ul.appendChild(li); // On ajoute le nouvel li à la fin de la liste ul
+	}
+</script>
+
+</body>
+</html>

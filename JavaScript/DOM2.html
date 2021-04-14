@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<title>Test</title>
+<meta charset="UTF-8">
+<style>
+	p{text-align: center}
+	
+	#zone{color: red}
+</style>
+<script>
+
+	
+</script>
+
+</head>
+<body>
+
+<p>Essai de <span id="zone" >texte</span></p>
+
+<input type="button" value="Supprimer une règle" onclick="supprime()">
+<input type="button" value="Ajouter une règle" onclick="ajoute()">
+
+
+<script>
+	var texte = document.querySelector('#zone');
+	function ajoute(){
+		let tabCouleur = ["red", "blue", "green", "yellow", "pink", "brown"];
+		let couleur = Math.floor(Math.random()*(tabCouleur.length));
+		texte.setAttribute("style", "color : " + tabCouleur[couleur]);
+		console.log(couleur, tabCouleur[couleur]);	
+	}
+
+	function supprime(){
+		texte.removeAttribute("style");
+	}
+</script>
+</body>
+</html>
