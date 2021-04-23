@@ -25,7 +25,6 @@ public class Calculatrice2 {
 	static boolean virgule = false;
 	static boolean op = false;
 	private boolean div0 = false;
-	private boolean neg = false;
 	boolean erreur = false;
 	private boolean secondNumber = false;
 	private String operateur = ""; // string qui va contenir l'opérateur sur lequel on appuie
@@ -36,7 +35,6 @@ public class Calculatrice2 {
 	private JLabel actionReceived;
 	private JFrame frmCalculette;
 	private static JTextField valeur2;
-	private static JTextField valeur1;
 
 	/*
 	 * Create the application.
@@ -62,6 +60,7 @@ public class Calculatrice2 {
 		JButton btnNewButton = new JButton("1"); // Création d'un nouveau bouton
 		btnNewButton.addActionListener(new ActionListener() { // Ajout d'event listener
 			public void actionPerformed(ActionEvent e) {
+				op = false;
 				ajouter('1');
 				afficherTableau();
 			}
@@ -211,10 +210,10 @@ public class Calculatrice2 {
 		btnNewButton_16.setBounds(78, 284, 194, 34);
 		frmCalculette.getContentPane().add(btnNewButton_16);
 
-		JButton btnNewButton_17 = new JButton("(-)");
-		btnNewButton_17.addActionListener(new MultiListener());
-		btnNewButton_17.setBounds(10, 284, 58, 34);
-		frmCalculette.getContentPane().add(btnNewButton_17);
+//		JButton btnNewButton_17 = new JButton("(-)");
+//		btnNewButton_17.addActionListener(new NegListener());
+//		btnNewButton_17.setBounds(10, 284, 58, 34);
+//		frmCalculette.getContentPane().add(btnNewButton_17);
 
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -225,14 +224,6 @@ public class Calculatrice2 {
 		/*
 		 * Création de textField pour afficher les opérations
 		 */
-		valeur1 = new JTextField();
-		valeur1.setText(" ");
-		valeur1.setHorizontalAlignment(SwingConstants.RIGHT);
-		valeur1.setFont(new Font("Dialog", Font.PLAIN, 15));
-		valeur1.setBorder(new LineBorder(new Color(0, 0, 0)));
-		valeur1.setBounds(146, 23, 114, 20);
-		frmCalculette.getContentPane().add(valeur1);
-		valeur1.setColumns(10);
 
 		valeur2 = new JTextField();
 		valeur2.setText("0");
@@ -269,11 +260,10 @@ public class Calculatrice2 {
 	// les différentes fonction de calcul
 	private void calcul() {
 		double number = Double.parseDouble(tab);
-		if(neg) {
-			number *= -1;
-		}
+
 		if (operateur.equals("+")) {
-			resultat += number;// Double.parseDouble(String) permet de transformer une chaîne de caractères en double
+			resultat += number;// Double.parseDouble(String) permet de transformer une chaîne de caractères en
+								// double
 		}
 		if (operateur.equals("-")) {
 			resultat -= number;
@@ -292,6 +282,9 @@ public class Calculatrice2 {
 	}
 
 	// Description des tâches à effectuer en cas d'activation d'event listener
+	/*
+	 * Clic sur le +
+	 */
 	class PlusListener implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			/*
@@ -301,8 +294,8 @@ public class Calculatrice2 {
 				op = true;
 				System.out.println(operateur);
 				/*
-				 * on teste si première opération pour enregistrer la première
-				 * valeur dans resultat
+				 * on teste si première opération pour enregistrer la première valeur dans
+				 * resultat
 				 */
 				if (secondNumber) {
 					calcul(); // appel de la méthode calcul
@@ -320,26 +313,36 @@ public class Calculatrice2 {
 		}
 	}
 
+	/*
+	 * Clic sur le -
+	 */
 	class MinusListener implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
-			if (op == false) {
-				op = true;
-				if (secondNumber) {
-					calcul(); // appel de la méthode calcul
-					System.out.println(resultat);
-					testDivPar0();
-				} else {
-					resultat = Double.parseDouble(tab);
-					secondNumber = true;
-					tab = "";
-					virgule = false;
+
+			if (tab.equals("")) {
+				tab = "-";
+			} else {
+				if (op == false) {
+					op = true;
+					if (secondNumber) {
+						calcul(); // appel de la méthode calcul
+						System.out.println(resultat);
+						testDivPar0();
+					} else {
+						resultat = Double.parseDouble(tab);
+						secondNumber = true;
+						tab = "";
+						virgule = false;
+					}
 				}
 				operateur = "-";
-
 			}
 		}
 	}
 
+	/*
+	 * Clic sur le *
+	 */
 	class MultiListener implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			if (op == false) {
@@ -354,13 +357,16 @@ public class Calculatrice2 {
 					tab = "";
 					virgule = false;
 				}
-				operateur = "*"; 
+				operateur = "*";
 
 			}
 
 		}
 	}
 
+	/*
+	 * Clic sur le /
+	 */
 	class DivListener implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			if (op == false) {
@@ -382,13 +388,15 @@ public class Calculatrice2 {
 		}
 	}
 
-	class NegListener implements ActionListener {
-		public void actionPerformed(ActionEvent ae) {
-			neg = true;
-			op = true;
-		}
-	}
-
+//	class NegListener implements ActionListener {
+//		public void actionPerformed(ActionEvent ae) {
+//			tab = "-";
+//			op = true;
+//		}
+//	}
+	/*
+	 * Clic sur le C
+	 */
 	class CleanListener implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			// mettre code pour afficher 0 à l'écran
@@ -401,6 +409,9 @@ public class Calculatrice2 {
 		}
 	}
 
+	/*
+	 * Clic sur le =
+	 */
 	class EqualListener implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			calcul();
@@ -412,6 +423,9 @@ public class Calculatrice2 {
 
 	}
 
+	/*
+	 * On test si on a déjà mis une virgule dans un nombre
+	 */
 	private void testVirgule() {
 		if (virgule) {
 		} else {
@@ -420,6 +434,9 @@ public class Calculatrice2 {
 		}
 	}
 
+	/*
+	 * On test si on ne divise pas par 0
+	 */
 	private void testDivPar0() {
 		if (div0 == false) {
 			System.out.println(resultat);
