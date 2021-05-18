@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="structure.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <title>Contact</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <nav>
+                <ul class="navigation">
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./algorithme/index.html">Algorithme</a></li>
+                    <li><a href="#">Javascript</a></li>
+                    <li><a href="#">SQL</a></li>
+                    <li><a href="#">Java</a></li>
+                    <li><a href="">HTML & CSS</a></li>
+                    <li><a href="#">Agile</a></li>
+                    <li><a href="#">Posture consultant</a></li>
+                    <li><a href="#">Overview Admin Saleforce</a></li>
+                    <li><a href="#">APEX & VisualForce</a></li>
+                    <li><a class="active" href="./pages/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+
+    <main>
+        <div id="idTitreModule">
+            <h1>Contact</h1>
+        </div>
+        <!-- Contact -->
+
+        <section id="contact">
+
+            <form action="" method="get" class="contact-form">
+                <div class="champGlobalContactForm">
+                    <div>
+                        <div class="champContactForm">
+                            <label for="name" class="labelContact">Nom Prénom :</label>
+                            <input type="text" name="name" id="name" required placeholder=" Nom Prénom">
+                        </div>
+                        <div class="champContactForm">
+                            <label for="societe" class="labelContact">Société</label>
+                            <input type="text" name="societe" id="societe" placeholder=" Société">
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <div class="champContactForm">
+                            <label for="phone" class="labelContact">Téléphone :</label>
+                            <input type="tel" name="phone" id="phone" placeholder=" Téléphone">
+
+                        </div>
+                        <div class="champContactForm">
+                            <label for="email" class="labelContact"> E-mail :</label>
+                            <input type="email" name="email" id="email" required placeholder=" E-mail">
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="champMessageContactForm">
+                    <label for="text"> Votre message :</label>
+                    <input type="text" name="text" id="text" required>
+                </div>
+
+            </form>
+
+        </section>
+    </main>
+    <footer>
+        <h6>Créé par le groupe 2</h6>
+    </footer>
+
+</body>
+
+</html>
